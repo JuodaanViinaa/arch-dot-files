@@ -1,0 +1,171 @@
+snippet beg "begin{} / end{}" bA
+\begin{$1}
+	$2
+\end{$1}
+$0
+endsnippet
+
+
+snippet \frac "Line Fraction" iA
+\frac{$1}{$2}$0
+endsnippet
+
+
+snippet // "Full Fraction" iA
+\frac{
+	$1
+}{
+	$2
+}$0
+endsnippet
+
+
+snippet "" "Comillas" iA
+\`\`$1''$0
+endsnippet
+
+
+snippet \sum "Sum" wA
+\sum_{$1}^{$2}$0
+endsnippet
+
+
+snippet $ "Inline Math" iA
+$$1$$0
+endsnippet
+
+
+snippet dm "Display math" bA
+$$
+$1
+$$
+$0
+endsnippet
+
+
+snippet tt "Title" bA
+{\scshape\bfseries $1}
+
+$0
+endsnippet
+
+
+snippet ii "Italic shape" wA
+{\itshape $1}$0
+endsnippet
+
+
+snippet cc "SmallCaps" wA
+{\scshape $1}$0
+endsnippet
+
+
+snippet bb "bfseries" wA
+{\bfseries $1}$0
+endsnippet
+
+
+snippet ss "slanted shape" wA
+{\slshape $1}$0
+endsnippet
+
+
+snippet _ "Subíndice" iA
+_{$1}$0
+endsnippet
+
+
+snippet ^ "Superíndice" iA
+^{$1}$0
+endsnippet
+
+
+snippet citas "Documento con citas" bA
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{anysize}
+\usepackage{graphicx}
+\marginsize{25mm}{25mm}{25mm}{25mm}
+\usepackage[colorlinks, citecolor=blue]{hyperref}
+\renewcommand{\refname}{Referencias}
+\usepackage[backend=biber,style=apa]{biblatex}
+\addbibresource{library.bib}
+
+\title{$1}
+\author{$2}
+\date{$3}
+
+\begin{document}
+{\scshape\bfseries \maketitle}
+
+$0
+
+
+\printbibliography
+
+\end{document}
+endsnippet
+
+
+snippet resumen "Documento sin citas" bA
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{anysize}
+\usepackage{graphicx}
+\marginsize{25mm}{25mm}{25mm}{25mm}
+
+\title{$1}
+\author{$2}
+\date{$3}
+
+\begin{document}
+{\scshape\bfseries \maketitle}
+
+$0
+
+
+\end{document}
+endsnippet
+
+
+snippet hrd "Hipótesis de reducción de la demora" wA
+hipótesis de reducción de la demora$0
+endsnippet
+
+
+snippet foop "Forrajeo óptimo" wA
+forrajeo óptimo$0
+endsnippet
+
+
+snippet tefo "Teoría de forrajeo óptimo" wA
+teoría de forrajeo óptimo$0
+endsnippet
+
+
+snippet estíumlo "estímulo" wA
+estímulo$0
+endsnippet
+
+
+snippet \figure "Figura" bA
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics[scale=$1]{$2}
+		\caption{$3}
+	\end{center}
+\end{figure}
+$0
+endsnippet
+
+
+snippet irt "IRT $> 11s$" wA
+IRT $> 11s$$0
+endsnippet
+
