@@ -8,7 +8,7 @@ Window Manager: awesomewm
 
 Compositor: picom
 
-Terminal: alacritty
+Terminal: alacritty / kitty
 	Para hacer default: /etc/xdg/awesome/rc.lua
 
 Sonido: pavucontrol
