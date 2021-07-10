@@ -1,0 +1,38 @@
+Instalar NetworkManager
+systemctl start NetworkManager
+systemctl enable NetworkManager
+
+Display manager: sddm
+
+Window Manager: awesomewm
+
+Compositor: picom
+
+Terminal: alacritty
+	Para hacer default: /etc/xdg/awesome/rc.lua
+
+Sonido: pavucontrol
+
+Idioma teclado: setxkbmap -layout latam
+	/etc/X11/xorg.conf.d/00-keyboard.conf
+	/etc/vconsole.conf
+
+Wallpaper: /usr/share/awesome/themes/default/background.png
+	feh --bg-scale ~/path/to/background
+
+Shell: fish
+	pacman -S fish
+	cat /etc/shells
+	echo $SHELL
+	chsh
+	chsh -s /usr/bin/fish
+
+Explorador: nemo
+
+
+Screen tearing: .xprofile:
+	xrandr --output HDMI-A-0 --set TearFree on
+
+
+Vim: Vimplug.
+	Plugins: NerdTree, Ultisnips, 
