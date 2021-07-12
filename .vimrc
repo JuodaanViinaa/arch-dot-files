@@ -20,6 +20,7 @@ runtime! archlinux.vim
 set number		"Show line numbers
 syntax on		"Syntax highlighting
 set spell spelllang=es,en_us
+set so=4
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 inoremap <C-a> <c-g>u<Esc>[szg`]a<c-g>u
 
