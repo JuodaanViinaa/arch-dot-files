@@ -1,136 +1,224 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def comment():
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+	return x != '0' and y != '0'
+endglobal
+
+
 snippet beg "begin{} / end{}" bA
-\begin{$1}
+\\begin{$1}
 	$2
-\end{$1}
+\\end{$1}
 $0
 endsnippet
 
 
+snippet vbeg "begin{} / end{}"
+\\begin{$1}
+	${VISUAL}
+\\end{$1}$0
+endsnippet
+
+
+context math()
 snippet \frac "Line Fraction" iA
-\frac{$1}{$2}$0
+\\frac\{$1\}\{$2\}$0
 endsnippet
 
 
+context math()
 snippet // "Full Fraction" iA
-\frac{
+\\frac\{
 	$1
-}{
+\}\{
 	$2
-}$0
+\}$0
 endsnippet
 
 
-snippet "" "Comillas" iA
+snippet ´ "Comillas" i
 \`\`$1''$0
 endsnippet
 
 
-snippet \sum "Sum" wA
-\sum_{$1}^{$2}$0
+snippet v´ "Comillas visuales" i
+\`\`${VISUAL}''$0
 endsnippet
 
 
-snippet $ "Inline Math" iA
-$$1$$0
+context math()
+snippet \sum "Sum" i
+\\sum_\{$1\}^\{$2\}$0
+endsnippet
+
+
+snippet mk "Inline Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ':']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+
+snippet vmk "Visual Inline Math" wA
+$${VISUAL}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ':']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
 endsnippet
 
 
 snippet dm "Display math" bA
-$$
+\\[
 $1
-$$
+${2:.}\\]$0
+endsnippet
+
+
+snippet vdm "Visual Display math" bA
+\\[
+${VISUAL}
+\\]$0
+endsnippet
+
+
+context math()
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+
+context math()
+snippet . "." i
+\{.\}$0
+endsnippet
+
+
+snippet tt "Title" b
+\{\\noindent\\scshape\\bfseries $1}
+
 $0
 endsnippet
 
 
-snippet tt "Title" bA
-{\scshape\bfseries $1}
+snippet vtt "Title visual" b
+\{\\noindent\\scshape\\bfseries ${VISUAL}}
 
 $0
 endsnippet
 
 
-snippet ii "Italic shape" wA
-{\itshape $1}$0
+snippet ii "Italic shape" w
+\{\\itshape $1}$0
 endsnippet
 
 
-snippet cc "SmallCaps" wA
-{\scshape $1}$0
+snippet vii "Italic shape visual" w
+\{\\itshape ${VISUAL}}$0
 endsnippet
 
 
-snippet bb "bfseries" wA
-{\bfseries $1}$0
+snippet cc "SmallCaps" w
+\{\\scshape $1}$0
 endsnippet
 
 
-snippet ss "slanted shape" wA
-{\slshape $1}$0
+snippet vcc "SmallCaps visual" w
+\{\\scshape ${VISUAL}}$0
 endsnippet
 
 
-snippet _ "Subíndice" iA
-_{$1}$0
+snippet bb "bfseries" w
+\{\\bfseries $1}$0
 endsnippet
 
 
+snippet vbb "bfseries visual" w
+\{\\bfseries ${VISUAL}}$0
+endsnippet
+
+
+snippet ss "slanted shape" w
+\{\\slshape $1}$0
+endsnippet
+
+
+snippet vss "slanted shape visual" w
+\{\\slshape ${VISUAL}}$0
+endsnippet
+
+
+context math()
+snippet _ "Subíndice" i
+_\{$1\}$0
+endsnippet
+
+
+context math()
 snippet ^ "Superíndice" iA
-^{$1}$0
+^\{$1\}$0
 endsnippet
 
 
 snippet citas "Documento con citas" bA
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[spanish]{babel}
-\usepackage{csquotes}
-\usepackage{anysize}
-\usepackage{graphicx}
-\marginsize{25mm}{25mm}{25mm}{25mm}
-\usepackage[colorlinks, citecolor=blue]{hyperref}
-\renewcommand{\refname}{Referencias}
-\usepackage[backend=biber,style=apa]{biblatex}
-\addbibresource{library.bib}
+\\documentclass[a4paper,12pt]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage[spanish]{babel}
+\\usepackage{csquotes}
+\\usepackage{anysize}
+\\usepackage{graphicx}
+\\marginsize{25mm}{25mm}{25mm}{25mm}
+\\usepackage[colorlinks, citecolor=blue]{hyperref}
+\\renewcommand{\refname}{Referencias}
+\\usepackage[backend=biber,style=apa]{biblatex}
+\\addbibresource{library.bib}
 
-\title{$1}
-\author{$2}
-\date{$3}
+\\title{$1}
+\\author{$2}
+\\date{$3}
 
-\begin{document}
-{\scshape\bfseries \maketitle}
+\\begin{document}
+\{\\scshape\\bfseries \\maketitle}
 
 $0
 
 
-\printbibliography
+\\printbibliography
 
-\end{document}
+\\end{document}
 endsnippet
 
 
 snippet resumen "Documento sin citas" bA
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[spanish]{babel}
-\usepackage{csquotes}
-\usepackage{anysize}
-\usepackage{graphicx}
-\marginsize{25mm}{25mm}{25mm}{25mm}
+\\documentclass[a4paper,12pt]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage[spanish]{babel}
+\\usepackage{csquotes}
+\\usepackage{anysize}
+\\usepackage{graphicx}
+\\marginsize{25mm}{25mm}{25mm}{25mm}
 
-\title{$1}
-\author{$2}
-\date{$3}
+\\title{$1}
+\\author{$2}
+\\date{$3}
 
-\begin{document}
-{\scshape\bfseries \maketitle}
+\\begin{document}
+\{\\scshape\\bfseries \\maketitle}
 
 $0
 
 
-\end{document}
+\\end\{document\}
 endsnippet
 
 
@@ -155,17 +243,157 @@ endsnippet
 
 
 snippet \figure "Figura" bA
-\begin{figure}[ht]
-	\begin{center}
-		\includegraphics[scale=$1]{$2}
-		\caption{$3}
-	\end{center}
-\end{figure}
+\\begin{figure}[!ht]
+	\\begin{center}
+		\\includegraphics[scale=${1:0.5}]{${2:path_to_image}}
+		\\caption{$3}
+	\\end{center}
+\\end{figure}
 $0
 endsnippet
 
 
-snippet irt "IRT $> 11s$" wA
-IRT $> 11s$$0
+context math()
+snippet \bar "\bar{ }" wA
+\\bar{$1}$0
 endsnippet
 
+
+context math()
+snippet \hat "\hat{ }" wA
+\\hat{$1}$0
+endsnippet
+
+
+snippet \eqn "\begin{eqnarray*}" bA
+\\begin{eqnarray*}
+	$1
+\\end{eqnarray*}
+$0
+endsnippet
+
+
+snippet equation "\begin{equation}" bA
+\\begin{equation}\label{$1}
+	$2
+\\end{equation}
+$0
+endsnippet
+
+
+snippet box "Box"
+\{\centering\framebox[1.1\width]{$1} \par\}$0
+endsnippet
+
+
+snippet vbox "VBox"
+\{\\centering\\framebox[1.1\width]\{${VISUAL}\} \\par\}$0
+endsnippet
+
+
+snippet parbox "Paragraph box"
+\\vspace\{${1:2mm}\}
+\{\\centering\\fbox{\\parbox{${3:0.95}${4:\\textwidth}}{%
+$5
+\}\}\}
+\\vspace\{${2:2mm}\}$0
+endsnippet
+
+
+snippet vparbox "VParagraph box"
+\\vspace\{${1:2mm}\}
+\{\\centering\\fbox{\\parbox{${3:0.95}${4:\\textwidth}}{%
+${VISUAL}
+\}\}\}
+\\vspace\{${2:2mm}\}$0
+endsnippet
+
+
+snippet array "Array environment" b
+\[
+\begin{array}{$1}
+	$2
+\end{array}
+\]$0
+endsnippet
+
+
+snippet sec "Section" b
+\\section\{${1:Section Title}\}
+
+$0
+endsnippet
+
+
+snippet subsec "Subsection" b
+\\subsection\{${1:Subsection Title}\}
+
+$0
+endsnippet
+
+
+snippet subsubsec "subsubsection" b
+\\subsubsection\{${1:Subsubsection Title}\}
+
+$0
+endsnippet
+
+
+context math()
+snippet mbox "\mbox"
+\\mbox\{$1\}$0
+endsnippet
+
+
+context math()
+snippet vbox "\mbox"
+\\mbox\{${VISUAL}\}$0
+endsnippet
+
+
+context math()
+snippet mrm "mathrm{}" i
+\\mathrm\{$1}$0
+endsnippet
+
+
+context math()
+snippet vmrm "mathrm{}" i
+\\mathrm\{${VISUAL}\}$0
+endsnippet
+
+
+context math()
+snippet \int "\int_{}^{}" i
+\\int_\{$1\}^\{$2\}$0
+endsnippet
+
+
+snippet codebox "codebox" bA
+\\begin\{tcolorbox}[
+    enhanced,
+    attach boxed title to top left=\{xshift=6mm,yshift=-3mm},
+    colback=lightgreen!20,
+    colframe=lightgreen,
+    colbacktitle=lightgreen,
+    title=${1:Python code example},
+    fonttitle=\\bfseries\\color{black},
+    boxed title style=\{size=small,colframe=lightgreen,sharp corners},
+    sharp corners,
+    ]
+    \\begin\{minted}[linenos]\{${2:language}}
+$3
+    \\end\{minted}
+\\end\{tcolorbox}$0
+endsnippet
+
+
+snippet verb "verbatim typeset"
+\\verb|$1|$0
+endsnippet
+
+
+context math()
+snippet mbb "boldsymbol" i
+\\boldsymbol\{$1\}$0
+endsnippet

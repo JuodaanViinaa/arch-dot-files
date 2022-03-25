@@ -1,0 +1,30 @@
+global !p
+from datetime import datetime
+endglobal
+
+
+snippet template "Python boilerplate code" bA
+#!/usr/bin/env python
+
+"""
+Created on `!p snip.rv = datetime.now().strftime("%d-%B-%Y %H:%M")`
+Code by Daniel Maldonado
+${1:Replace with a brief description of the code. Write the code below this text.}
+"""
+$0
+endsnippet
+
+
+snippet edited "Edited on:"
+Edited on `!p snip.rv = datetime.now().strftime("%d-%B-%Y %H:%M")`$0
+endsnippet
+
+
+snippet def "define function" b
+def ${1:function_name}(${2:parameters}):
+	"""
+	TODO: Create docstring for $1
+	"""
+	$4
+
+endsnippet

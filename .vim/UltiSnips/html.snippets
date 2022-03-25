@@ -1,0 +1,148 @@
+snippet boiler "html5 boilerplate code" bA
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="$1">
+	<script src="$2"></script>
+	<title>${3:Title}</title>
+</head>
+<body>
+
+$0
+
+</body>
+</html>
+endsnippet
+
+
+snippet	tag "Creates a tag"
+<${1:div}>
+	$2
+</${1/(\w+).*/$1/}>$0
+endsnippet
+
+
+snippet vtag "Visual tag"
+<${1:div}>
+	${VISUAL}
+</${1/(\w+).*/$1/}>$0
+endsnippet
+
+
+snippet htag "horizontal tag" i
+<${1:a}>$2</${1/(\w+).*/$1/}>$0
+endsnippet
+
+
+snippet vvtag "Visual horizontal tag" i
+<${1:a}>${VISUAL}</${1/(\w+).*/$1/}>$0
+endsnippet
+
+
+snippet class "Opens necessary quotation marks" A
+class="$1"$0
+endsnippet
+
+
+snippet id "Opens necessary quotation marks" A
+id="$1"$0
+endsnippet
+
+
+snippet type "Opens necessary quotation marks" A
+type="$1"$0
+endsnippet
+
+
+snippet href "Opens quotation marks" A
+href="$1"$0
+endsnippet
+
+
+snippet self "Self-closing tag"
+<${1:tagname}>
+endsnippet
+
+
+snippet vself "Self-closing tag"
+<${1:tagname}>
+endsnippet
+
+
+snippet img "Image tag"
+<img src="$1" alt="$2">$0
+endsnippet
+
+
+snippet br "Line break" i
+<br>$0
+endsnippet
+
+
+snippet comm "comment" bA
+<!-- $1 -->
+$0
+endsnippet
+
+
+snippet ul "unordered list" b
+<ul>
+	$1
+</ul>$0
+endsnippet
+
+
+snippet ol "ordered list" b
+<ol>
+	$1
+</ol>$0
+endsnippet
+
+
+snippet li "list item" b
+<li$1>$2</li>$0
+endsnippet
+
+
+snippet dl "detailed list" b
+<dl>
+	$1
+</dl>$0
+endsnippet
+
+
+snippet dt "detail item" b
+<dt$1>$2</dt>$0
+endsnippet
+
+
+snippet dd "detail data" b
+<dd$1>$2</dd>$0
+endsnippet
+
+
+snippet input "<input>" b
+<input type="$1"$2>$0
+endsnippet
+
+
+snippet h1 "<h1>" bA
+<h1>$1</h1>$0
+endsnippet
+
+
+snippet h2 "<h2>" bA
+<h2>$1</h2>$0
+endsnippet
+
+
+snippet h3 "<h3>" bA
+<h3>$1</h3>$0
+endsnippet
+
+snippet par "<p>" b
+<p>$1</p>$0
+endsnippet

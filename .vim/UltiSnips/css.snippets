@@ -1,0 +1,24 @@
+snippet . "class" b
+.${1:class} \{
+	$2
+}$0
+endsnippet
+
+
+snippet # "id" b
+#${1:id} \{
+	$2
+}$0
+endsnippet
+
+
+snippet com "comment"
+/* ${1:comment} */$0
+endsnippet
+
+
+snippet @ "media query" b
+@$1 (${2:condition}) $3 {
+	$4
+}$5
+endsnippet
