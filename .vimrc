@@ -17,27 +17,70 @@ runtime! archlinux.vim
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
 
+" Python compatibility. Prevents error with ultisnips and matchtagalways.
+if has('python3')
+endif
+
+set nocompatible
 set number		"Show line numbers
 syntax on		"Syntax highlighting
 set spell spelllang=es,en_us
 set so=4
+set linebreak
+set expandtab
+set tabstop=4
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 inoremap <C-a> <c-g>u<Esc>[szg`]a<c-g>u
+set hls
+"Make double-<Esc> clear search highlights
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+" Leader twice + t opens a terminal on the right.
+noremap <Leader>\t :botright vertical terminal<CR>
+" Easy split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" Newline without exiting normal mode
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 
+
+" imap <silent> <Up> <C-o>gk
+" imap <silent> <Down> <C-o>gj
+
+let g:polyglot_disabled = ['markdown']
 " Plugins instalados con Vim Plug
 call plug#begin('~/.vim/plugged')
 Plug 'lervag/vimtex'	
+  let g:tex_flavor='latex'
+  let g:vimtex_view_method='zathura'
+  let g:vimtex_quickfix_mode=1
+  let g:vimtex_view_forward_search_on_start=0
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sainnhe/sonokai'
 Plug 'scrooloose/nerdtree'
 Plug 'raimondi/delimitmate'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'flazz/vim-colorschemes'
 Plug 'sirver/ultisnips'
+Plug 'sheerun/vim-polyglot'
+Plug 'dylanaraps/wal'
+Plug 'KeitaNakamura/tex-conceal.vim'
+  set conceallevel=2
+  let g:tex_conceal='abdmg'
+  hi Conceal ctermbg=NONE
+  hi Conceal ctermfg=NONE
+Plug 'joom/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'valloric/matchtagalways'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 
-"Esta sección ajusta el tamaño de la ventana de QuickFix al texto que contiene
+" Autocomplete per language
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+
+" Esta sección ajusta el tamaño de la ventana de QuickFix al texto que contiene
 au FileType qf call AdjustWindowHeight(2, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
@@ -68,4 +111,14 @@ let g:sonokai_disable_italic_comment = 1
 " Esquema de color
 syntax enable
 set background=dark
-colorscheme eldar
+colorscheme wal
+
+" Remove conceal highlighting (must go after set background=dark).
+highlight clear Conceal
+
+
+" Hacer que no se agregue sangria a ciertos tags en html
+let g:html_indent_autotags = "html,body"
+
+" Commands
+command! SortCSSBraceContents :g#\({\n\)\@<=#.,/}/sort
