@@ -8,14 +8,16 @@ Window Manager: awesomewm
 
 Compositor: picom
 
-Terminal: alacritty / kitty
+Terminal: alacritty
 	Para hacer default: /etc/xdg/awesome/rc.lua
 
 Sonido: pavucontrol
 
-Idioma teclado: setxkbmap -layout latam
-	/etc/X11/xorg.conf.d/00-keyboard.conf
+Idioma teclado: setxkbmap -layout latam (Temporal para la sesión actual)
+	/etc/X11/xorg.conf.d/00-keyboard.conf (Persistente)
 	/etc/vconsole.conf
+	localectl [--no-convert] set-x11-keymap layout [model [variant [options]]]
+	localectl set-x11-keymap us,latam "" intl,
 
 Wallpaper: /usr/share/awesome/themes/default/background.png
 	feh --bg-scale ~/path/to/background
